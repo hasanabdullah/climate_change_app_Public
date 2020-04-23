@@ -1,0 +1,47 @@
+<mat-expansion-panel (opened)="panelOpenState = true" (closed)="panelOpenState = false" #expansionPanel="matExpansionPanel">
+    <mat-expansion-panel-header>
+        <mat-panel-title>
+            Input Menu
+        </mat-panel-title>
+        <mat-panel-description>
+            {{panelOpenState ? 'Select your desired options below' : 'Click here to open the input menu'}}
+        </mat-panel-description>
+    </mat-expansion-panel-header>
+    <div style="padding: 0 20em 1em 20em;">
+    <form #userSelections="ngForm" (ngSubmit)="onSubmit()" novalidate style="text-align: center;">
+
+        <div class="form-group">
+            <div class="mat-title">Select a State</div>
+            <select class="custom-select" required #state="ngModel" name="userState" [(ngModel)]="userSelection.state">
+                <option *ngFor="let state of states" value="{{ state.stateCode }}">{{ state.stateName }}</option>
+            </select>
+            <small class="text-danger" [class.d-none]="state.valid || state.untouched">State is required</small>
+        </div>
+
+        <div class="mat-title">Input a Date Range</div>
+
+        <div class="form_group">
+            <label>Start Date</label>
+            <input type="text" [class.is-invalid]="start.invalid && start.touched" required #start="ngModel"
+                pattern="(19[3-9]\d|200\d|201[0-5])-(((0[13578]|1[02])-(0[1-9]|[12]\d|3[01]))|((0[469]|11)-(0[1-9]|[12]\d|30))|((02)-(0[1-9]|1\d|2[0-8])))"
+                class="form-control" name="userStartDate" placeholder="YYYY-MM-DD"
+                [(ngModel)]="userSelection.startDate" />
+            <small class="text-danger" [class.d-none]="start.valid || start.untouched">Start date must be a valid date
+                in the format YYYY-MM-DD. It must be between 1930-01-01 and 2015-12-31</small>
+        </div>
+
+        <div class="form_group">
+            <label>End Date</label>
+            <input type="text" [class.is-invalid]="end.invalid && end.touched" required #end="ngModel"
+                pattern="(19[3-9]\d|200\d|201[0-5])-(((0[13578]|1[02])-(0[1-9]|[12]\d|3[01]))|((0[469]|11)-(0[1-9]|[12]\d|30))|((02)-(0[1-9]|1\d|2[0-8])))"
+                class="form-control" name="userEndDate" placeholder="YYYY-MM-DD" [(ngModel)]="userSelection.endDate" />
+            <small class="text-danger" [class.d-none]="end.valid || end.untouched">End date must be a valid date in the
+                format YYYY-MM-DD. It must be between 1930-01-01 and 2015-12-31</small>
+        </div>
+
+        <mat-action-row>
+            <button class="btn btn-primary" [disabled]="userSelections.form.invalid" type="submit" (click)="expansionPanel.close()">Submit</button>
+        </mat-action-row>
+    </form>
+    </div>
+</mat-expansion-panel>

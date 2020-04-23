@@ -1,0 +1,100 @@
+TYPE html>
+<html>
+
+<head>
+  <script type="text/javascript" src="http://maps.google.com/maps/api/js?key=[ADD_KEY]"></script>
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <script type="text/javascript">
+    var map;
+    var loadMap = function() {
+      var myOptions = {
+        center: new google.maps.LatLng(39.952335, -75.163789),
+        zoom: 11,
+        mapTypeId: google.maps.MapTypeId.ROADMAP
+      };
+      map = new google.maps.Map(document.getElementById("map"), myOptions);
+
+      google.maps.event.addListener(map, "click", function(event) {
+        var latitude_clicked = event.latLng.lat();
+        var longitude_clicked = event.latLng.lng();
+        document.getElementById("latitude").value = latitude_clicked;
+        document.getElementById("longitude").value = longitude_clicked;
+      });
+
+      loadGeoData();
+
+    };
+    window.onload = loadMap;
+
+
+    var setMarker = function(myLatlng) {
+      marker = new google.maps.Marker({
+        position: myLatlng
+      });
+      marker.setMap(map);
+    };
+
+    function loadGeoData() {
+
+      var bool = [ < %= bool % > ];
+      var lat = [];
+      var long = [];
+      var name = [];
+      var desc = [];
+      var creator = [];
+
+      <
+      %
+      for (var i = 0; i < lat.length; i++) {
+        %
+        >
+
+        lat.push( < % -JSON.stringify(lat[i]) % > );
+        long.push( < % -JSON.stringify(long[i]) % > );
+        name.push( < % -JSON.stringify(name[i]) % > );
+        desc.push( < % -JSON.stringify(desc[i]) % > );
+        creator.push( < % -JSON.stringify(creator[i]) % > ); <
+        %
+      } %
+      >
+
+
+      for (var i = 0; i < name.length; i++) {
+        var latitude_one = lat[i];
+        var longitude_one = long[i];
+        var name_one = name[i];
+        var desc_one = desc[i];
+        var bool_one = bool[i];
+        var creator_one = creator[i];
+        var myLatlng = new google.maps.LatLng(latitude_one, longitude_one);
+        var marker = new google.maps.Marker({
+          position: myLatlng,
+          title: name_one,
+          content: desc_one
+        });
+
+        if (bool_one) {
+          marker.setIcon('http://maps.google.com/mapfiles/ms/icons/yellow-dot.png');
+        } else {
+          marker.setIcon('http://maps.google.com/mapfiles/ms/icons/red-dot.png');
+        }
+
+        var contentString = '<b>' + name_one + '</b><br>' + desc_one + '<br>' + '<i>Created By: ' + creator_one + '</i>';
+        marker['infowindow'] = new google.maps.InfoWindow({
+          content: contentString
+        });
+
+        google.maps.event.addListener(marker, 'click', function() {
+          this['infowindow'].open(map, this);
+        });
+
+        marker.setMap(map);
+      }
+
+    }
+  </script>
+
+</head>
+
+</html>

@@ -1,0 +1,156 @@
+<!-- 1 Component card for housing the narrative -->
+
+<mat-dialog-content> 
+<div *ngIf="doneLoadingDialog == false; else display1"> Loading...</div>
+<ng-template #display1>
+<h4> About This {{data.stormDetails.event_type}} </h4>
+<p>Occured from {{data.stormDetails.begin_date_time}} to {{data.stormDetails.end_date_time}}</p>
+<div *ngIf="data.stormDetails.flood_cause != '-999'">
+        <h6> Flood Cause - {{data.stormDetails.flood_cause}} </h6>
+        
+        </div>
+{{data.stormDetails.episode_narrative}}
+
+
+
+    <h6> Total Property Damages </h6>
+<div *ngIf="data.stormDetails.totalPropertyDamages < 0; else okay1">
+    0
+</div>
+<ng-template #okay1>{{data.stormDetails.totalPropertyDamages}}</ng-template>
+  
+
+<h6> Total Crop Damages </h6>
+<div *ngIf="data.stormDetails.totalCropDamages < 0; else okay2">
+        0
+    </div>
+    <ng-template #okay2>{{data.stormDetails.totalCropDamages}}</ng-template>
+
+
+    <h6> Total Injuries </h6>
+    <div *ngIf="data.stormDetails.totalInjuries < 0; else okay3">
+    0
+</div>
+<ng-template #okay3>{{data.stormDetails.totalInjuries}}</ng-template>
+
+
+    <h6> Total Deaths </h6>
+    <div *ngIf="data.stormDetails.totalDeaths < 0; else okay4">
+            0
+        </div>
+        <ng-template #okay4>{{data.stormDetails.totalDeaths}}</ng-template>
+
+
+    <h6> {{data.stormDetails.event_type}} Characteristics </h6>
+    <div *ngIf="data.stormDetails.prcp != -999 && data.stormDetails.prcp != null">
+    <p> Precipitation
+            {{data.stormDetails.prcp}}
+    </p>
+    </div>
+
+    <div *ngIf="data.stormDetails.snwd != -999 && data.stormDetails.snwd != null">
+
+  
+    <p> Snow Depth
+            {{data.stormDetails.snwd}}
+    </p>
+
+</div>
+
+<div *ngIf="data.stormDetails.tmax != -999 && data.stormDetails.tmax != null">
+
+    <p> Temp Max
+            {{data.stormDetails.tmax}}
+    </p>
+</div>
+
+    <div *ngIf="data.stormDetails.tmin != -999 && data.stormDetails.tmin != tmin">
+
+    <p> Temp Min
+            {{data.stormDetails.tmin}}
+    </p>
+    </div>
+    <br>
+    <hr>
+    <h6 class="reporting"> Reporting On This {{data.stormDetails.event_type}} </h6>
+    <!-- <div *ngIf="data.stormDetails.eventNarratives.length > 0">
+    <ul>
+        <li *ngFor="let eventNarrative of data.stormDetails.eventNarratives">
+        <h6>State: </h6> <p>{{eventNarrative.state}} </p>
+        <h6>Location: </h6> <p>{{eventNarrative.location}}</p>
+        <p>{{eventNarrative.narrative}} </p>
+        </li>
+    </ul>
+    </div>  -->
+
+    <!-- html table format -->
+    <!-- <div *ngIf="data.stormDetails.eventNarratives.length > 0">
+        <table>
+            <tr>
+                <th>State</th>
+                <th>Location</th>
+                <th>Narrative</th>
+            </tr>
+            <tr *ngFor="let eventNarrative of data.stormDetails.eventNarratives">
+                <td>{{eventNarrative.state}} </td>
+                <td>{{eventNarrative.location}}</td>
+                <td>{{eventNarrative.narrative}} </td>
+            </tr>
+        </table>
+    </div>  -->
+
+    <!-- Angular materials table -->
+    <!-- <table mat-table [dataSource]="data.stormDetails.eventNarratives" class="mat-elevation-z8">
+
+            <!- Note that these columns can be defined in any order.
+                  The actual rendered columns are set as a property on the row definition" -->
+          
+            <!-- State Column -->
+            <!-- <ng-container matColumnDef="state">
+              <th mat-header-cell *matHeaderCellDef> State </th>
+              <td mat-cell *matCellDef="let element"> {{elemennt.state}} </td>
+            </ng-container> -->
+          
+            <!-- Location Column -->
+            <!-- <ng-container matColumnDef="location">
+              <th mat-header-cell *matHeaderCellDef> Location </th>
+              <td mat-cell *matCellDef="let element"> {{element.location}} </td>
+            </ng-container> -->
+          
+            <!-- Narrative Column -->
+            <!-- <ng-container matColumnDef="narrative">
+              <th mat-header-cell *matHeaderCellDef> Narrative </th>
+              <td mat-cell *matCellDef="let element"> {{element.narrative}} </td>
+            </ng-container>
+          
+            <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+            <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+          </table>  -->
+          
+
+     <div *ngIf="data.stormDetails.eventNarratives.length > 0">
+            <table>
+                <tr>
+                    <th>State</th>
+                    <th>Location </th>
+                    <th >Narrative </th>
+                </tr>
+                <tr *ngFor="let eventNarrative of data.stormDetails.eventNarratives">
+                    <td>{{eventNarrative.state}} </td>
+                    <td>{{eventNarrative.location}}</td>
+                    <td>{{eventNarrative.narrative}} </td>
+                </tr>
+            </table>
+        </div> 
+    </ng-template> 
+
+    <!-- 1 Component for table of narratives, perhaps as a drop down feature with scrolling? -->   
+</mat-dialog-content>
+
+<mat-dialog-actions>
+    <button class="close_button" mat-button mat-dialog-close>Close</button>
+</mat-dialog-actions>
+
+<!-- 1 Component for damages total pie chart
+     1 Component for table that has deaths -->
+

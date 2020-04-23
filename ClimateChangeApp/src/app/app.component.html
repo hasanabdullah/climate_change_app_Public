@@ -1,0 +1,21 @@
+<div class="banner">
+  <img src="../assets/images/cloud-banner.jpg" alt="Climate Change"  style="width:100%; height:25vh">
+  <div class="banner-text">
+    <h1>Climate Change In Your State</h1>
+    <p>See how climate change is affecting where you live by visualizing climate data and storm events</p>
+  </div>
+</div>
+<mat-toolbar class="justify-content-around" color="primary">
+  <a mat-button color="accent" routerLink="/dashboard">Dashboard</a>
+  <a mat-button color="accent" routerLink="/anomalies">Anomalies</a>
+  <!-- <a mat-button color="accent" routerLink="/storm-events">Storm Events</a> -->
+</mat-toolbar>
+
+
+<selection-form></selection-form>
+<!-- <div style="background-color: red; height: 100%;"> -->
+<div style="width: 100%; min-height: 100%; background:rgb(232, 249, 255);">
+  <router-outlet></router-outlet>
+</div>
+<!-- </div> -->
+

@@ -1,0 +1,14 @@
+.close_button{
+    float: right;
+}
+
+table, th, td {
+    border:2px solid #b2c2bf; 
+    text-align: center;
+    border-collapse: collapse;
+}
+
+.reporting {
+    color: solid #b2c2bf;
+    text-align: center;
+}

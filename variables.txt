@@ -1,0 +1,47 @@
+Home Page:
+
+// Lists for graphs
+var graph1X = [];
+var graph1Y = [];
+var graph2X = [];
+var graph2Y = [];
+var graph3X = [];
+var graph3Y = [];
+
+// Search parameters
+var startDate = "";
+var endDate = "";
+var state = "";
+
+Page 1:
+
+// Query details
+<h5 id="firstH">
+<p id="firstP">
+<h5 id="secondH">
+<p id="secondP">
+<h5 id="thirdH">
+<p id="thirdP">
+<h5 id="forthH">
+<p id="forthP">
+
+// Search parameters
+var startDate = "";
+var endDate = "";
+var state = "";
+
+Page 2:
+
+// Query details
+<h5 id="firstH">
+<p id="firstP">
+<h5 id="secondH">
+<p id="secondP">
+<h5 id="thirdH">
+<p id="thirdP">
+<h5 id="forthH">
+<p id="forthP">
+
+// Search parameters
+var startDate = "";
+var state = "";
